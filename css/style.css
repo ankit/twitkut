@@ -1,0 +1,246 @@
+* {
+	font-family: Verdana, "MS Trebuchet", Arial, sans-serif;
+	font-size: 13px;
+}
+
+h3 {
+	font-family: Verdana, "Times New Roman", Arial, Helvetica;
+	font-size: 13px;
+	font-weight: bold;
+	font-variant: normal;
+	color: #355B85;
+	padding: 0;
+	margin: 0;
+}
+
+h3 a {
+	text-decoration: none;
+	color: #355B85;
+}
+
+h3 a:hover {
+	color: #474747;
+}
+
+h3 a:visited {
+	color: #355B85;
+}
+
+a img {
+	border: none !important;
+}
+
+.tweet {
+	padding: 2px;
+	margin-bottom: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #fff;
+	background-color: #EFF7FF;
+	float: left;
+	width: 99%;
+	font-size: 13px;
+}
+
+.userpic {
+	float: left;
+}
+
+.tweet a {
+	color: #355B85;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+.tweet a:hover {
+	text-decoration: underline;
+}
+
+.tweet a:visited {
+	color: #355B85;
+}
+
+.user-img {
+	float: left;
+	margin-right: 10px;
+}
+
+.user-img img {
+	height: 50px;
+	width: 50px;
+}
+
+.user {
+	float: left;
+	margin-top: 15px;
+}
+
+.user-img a img {
+	border: none;
+}
+
+#greet {
+	height: 48px;
+	margin-bottom: 5px;
+	background-color: #DEEFFF;
+	padding: 2px;
+}
+
+#settings {
+	float: left;
+	margin-right: 5px;
+	font-size: 10px;
+	height: 500px;
+}
+
+#settings a {
+	color: #355B85;
+}
+
+#links {
+	float: right;
+	margin-right: 5px;
+	clear: both;
+	margin-top: 2px;
+	margin-bottom: 5px;
+}
+
+.since {
+	color: #4A4A4A;
+	font-style: italic;
+	float: right;
+	font-size: 11px !important;
+	padding-right: 5px;
+}
+
+.text {
+	float: left;
+}
+
+.f_text {
+	display: inline;
+}
+
+.since a, .since a:visited {
+	color: #4A4A4A;
+}
+
+.since a:hover {
+	color: #4A4A4A;
+}
+
+#next_link {
+	float: right;
+	margin-right: 5px;
+	display: inline;
+}
+
+#back_link {
+	float: left;
+	display: inline;
+}
+
+.loading {
+	margin-left: 45%;
+	margin-top: 50px;
+}
+
+.error {
+	font-weight: bold;
+	color: #EC3C3E;	
+}
+
+#info {
+	font-weight: bold;
+	color: #65b86c;	
+}
+
+.button {
+	padding: 2px;
+	font-size: 11px;
+	color: #355B85;
+	text-decoration: underline;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.button:hover {
+	text-decoration: underline;
+}
+
+#links2 {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.smalltext {
+	font-size: 10px;
+	float: left;
+	clear: both;
+}
+
+/*for orkut styled tabs */
+.tablib_extension_left_selected, .tablib_extension_left_unselected {
+  	height: 23px;
+  	width: 6px;
+  	float: left;
+}
+.tablib_extension_left_selected {
+  	background-image: url(http://opensocial-resources.googlecode.com/svn/samples/orkut_ui/img/tabsel_l.gif);
+}
+.tablib_extension_left_unselected {
+  	background-image: url(http://opensocial-resources.googlecode.com/svn/samples/orkut_ui/img/tabnotsel_l.gif);
+}
+.tablib_selected, .tablib_unselected {
+  	font-size: 12px;
+  	font-height: 23px;
+  	text-transform: lowercase;
+  	height: 23px;
+  	line-height: 23px;
+  	font-family: Verdana,Arial,sans-serif;
+  	font-weight: 700;
+  	margin: 0px;
+  	padding: 0px;
+  	padding-right: 6px;
+  	width: auto;
+  	border: 0px;
+  	border-bottom: 1px solid #86A1C4;
+}
+.tablib_selected {
+  	background: url(http://opensocial-resources.googlecode.com/svn/samples/orkut_ui/img/tabsel_r.gif) no-repeat center right;
+  	color: #FFFFFF;
+}
+.tablib_unselected {
+  	background: url(http://opensocial-resources.googlecode.com/svn/samples/orkut_ui/img/tabnotsel_r.gif) no-repeat center right;
+  	color: #02679C;
+}
+td.tablib_unselected:hover {
+  	color: #00344F;
+  	text-decoration: underline;
+}
+.tablib_spacerTab, .tablib_emptyTab {
+  	border-bottom: 1px solid #86A1C4;
+}
+.tablib_emptyTab {
+  	width: 400px;
+}
+
+/* end of orkut styled tabs */
+
+.greet {
+	height: 20px;
+	margin-bottom: 5px;
+	background-color: #DEEFFF;
+	padding: 10px;
+	padding-top: 10px;
+}
+
+#tweets {
+	min-height: 800px;
+}
+
+#settings {
+	height: 300px !important;
+	float: left;
+}

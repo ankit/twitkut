@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Twitkut" title_url="http://ankitahuja.com/blog/webapps/twitkut" author="Ankit Ahuja" author_email="ahuja.ankit@gmail.com" description="Display your recent tweets/twitter updates on your profile page and let your friends know what you are doing! You will need to be registered at twitter.com to use this application. Follow me on twitter: @twitkut" screenshot="http://www.ankitahuja.com/apps/orkut/twitkut_screenshot.png" thumbnail="http://www.ankitahuja.com/apps/orkut/twitkut.png" >
+  <Require feature="opensocial-0.8" />
+ 	<Require feature="views" />
+ 	<Require feature="dynamic-height" /> 
+ 	<Require feature="tabs" />
+	<Require feature="opensocial-templates" >
+	</Require> 	
+	<Require feature="opensocial-data" />
+	<Locale lang="en" country="us" />
+  <OAuth>
+	  <Service name="twitter">
+	    <Access param_location="uri-query" url="http://twitter.com/oauth/access_token" />
+      <Request param_location="uri-query" url="http://twitter.com/oauth/request_token" />
+      <Authorization url="http://twitter.com/oauth/authorize?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+    </Service>
+  </OAuth>
+  </ModulePrefs>
+  <Optional feature="content-rewrite">
+  	<Param name="include-urls"></Param>
+  	<Param name="exclude-urls">.*</Param>
+  	<Param name="include-tags"></Param>
+  </Optional>
+  <Content type="html" view="canvas">
+  	<!-- ALm6fM2jILwKzDCzOxOK058uauuKNFfgyeFfpGgczKj6WF8UU0mIuJeS6kZmD9TzYV812KS3kKqe4ZcyrPJw0zK2nzkeaXQSXgEJDBKTMcTE0th8Wfoj9Jh0K2_i9PwL25VvqP_k7lMr5lKxAoTLUK648s9AvJXg_w== -->
+  <![CDATA[
+	<link rel="stylesheet" href="http://ankitahuja.com/apps/orkut/css/style.css" type="text/css" media="screen" charset="utf-8">
+	<!-- shindig oauth popup handling code -->
+ 	<script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
+	
+	<script type="text/javascript" src="http://ankitahuja.com/apps/orkut/js/prettydate.js"></script>
+	<script type="text/javascript" src="http://ankitahuja.com/apps/orkut/js/tweets.js"></script>
+	
+ 	<script type="text/javascript">
+		gadgets.util.registerOnLoadHandler(init);
+
+		function createTabs()
+		{
+			var tabs = new gadgets.TabSet(__MODULE_ID__, null, document.getElementById('tabs_div'));
+			var params = {
+	 	 		callback: changeSelectedTab
+			};
+			params.contentContainer = document.getElementById('user_tweets');
+			tabs.addTab('Your Tweets', params);
+	
+			params.contentContainer = document.getElementById('friends_tweets');
+			tabs.addTab("Friends' Tweets", params);
+	
+			params.contentContainer = document.getElementById('friends');
+			tabs.addTab('Friends',params);
+	
+			params.contentContainer = document.getElementById('settings');
+			tabs.addTab('Settings', params);
+			
+			tabs.alignTabs('left', 4);
+			var tabHeaders = document.getElementById('tabs_div_header').rows[0].cells;
+			var value = null;
+			var html = null;
+			for (var i in tabHeaders) {
+		  	if (tabHeaders[i].className && tabHeaders[i].className.match(/tablib_selected/)) {
+		    	value = tabHeaders[i].innerHTML;
+		    	html = "<span class='tablib_extension_left_selected'></span> " + value;
+		    	tabHeaders[i].innerHTML = html;
+		  	}
+		  	if (tabHeaders[i].className && tabHeaders[i].className.match(/tablib_unselected/)) {
+		    	value = tabHeaders[i].innerHTML;
+		    	html = "<span class='tablib_extension_left_unselected'></span> " + value;
+		    	tabHeaders[i].innerHTML = html;
+		  	}
+			}
+		}
+	</script>
+   	<!-- This app will update status of orkut with twitter status. It will also list all the recent tweets of a particular user! -->
+		<div id="tabs_div">
+			<div id="user_tweets">
+				<div id="greet"></div>
+				<div id="errorInTweetsView" class="error"></div>
+		      <div id="tweets">
+						<div class='loading'><img src='http://www.ankitahuja.com/apps/orkut/images/ajax-loader.gif' /></div>
+		      </div>
+		  </div>
+			<div id="friends_tweets">
+				<div id="friends_tweets_list"></div>
+			</div>
+			<div id="friends"></div>
+			<div id="settings" style="display:none">
+				<div class='greet'><h3>Settings</h3></div>
+				<div id="errorInSettings" class="error"></div>
+				<div id="info"></div>
+				<form id="setting_form" action="javascript:saveSettings();" >
+				<p>Enter Your Twitter ID: <input onfocus="" type="text" id="username" value="" /></p>
+				<p><input type="checkbox" id="hidereplies" /> Hide my @replies ( i.e. tweets beginning with @ will be hidden )</p>						<p><input type="checkbox" id="useoauth" onclick="toggleSignIn();"/>  *Authenticate using OAuth?</p>
+				</form>
+				<p><a href="javascript:void(0);" onclick="saveSettings();" >Save settings</a></p>
+				<p class="smalltext" style="font-size:12px;font-family:Verdana,Helvetica,Arial;">* Authenticating using OAuth will allow you to post updates to Twitter from Twitkut. Twitkut recommends you enable OAuth in order to utilize the full set of features.
+<br/><br/>
+* When you've enabled OAuth, please still enter your twitter username as it will be used to display tweets on your profile page. If you've protected updates, they won't be displayed.
+				</p>
+			</div>
+  	  </div>
+    ]]>
+	</Content>
+
+	<Content type="html" view="profile">
+    <![CDATA[
+		<link rel="stylesheet" href="http://ankitahuja.com/apps/orkut/css/style.css" type="text/css" media="screen" charset="utf-8">
+		<script xmlns:os="http://ns.opensocial.org/2008/markup" type="text/os-data">
+			<os:PersonAppDataRequest key="twitterData" method="appdata.get" userId="@owner" appId="@app" />
+			<os:OwnerRequest key="owner" />
+		</script>
+		<script xmlns:os="http://ns.opensocial.org/2008/markup" type="text/os-data" require="twitterData">
+			<os:HttpRequest key="tweets" href="http://search.twitter.com/search.json?q=from:${osx:parseJson(twitterData[owner.id]).twitterid}&rpp=5" />
+		</script>
+		
+		<script type="text/os-template" xmlns:os="http://ns.opensocial.org/2008/markup" xmlns:osx= "http://ns.opensocial.org/2009/extensions" require="twitterData, tweets, owner">        
+			<div id="greet">
+				<div class="user-img">
+					<img height="50px" width="50px" src="${tweets.content.results[0].profile_image_url}" />
+				</div>
+				<div class="user">
+					<h3>
+						<osx:NavigateToApp>${osx:parseJson(twitterData[owner.id]).twitterid}'s recent Tweets</osx:NavigateToApp>
+					</h3>
+				</div>
+			</div>
+			<div id="tweets_profile">
+				<div class="tweet" repeat=${tweets.content.results}>
+					<div class="text">
+						${Cur.text}
+					</div>
+					<div style="font-size:11px" class="since">
+						${Cur.created_at}
+					</div>
+				</div>
+		</div>
+	</script>
+    ]]>
+    </Content>
+</Module>
